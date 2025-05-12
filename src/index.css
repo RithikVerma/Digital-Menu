@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body, #root {
+    @apply h-full w-full m-0 p-0 overflow-hidden;
+  }
+  
+  :root {
+    --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --font-display: 'Montserrat', var(--font-sans);
+    
+    /* Define smooth scrolling & disable drag for better UX */
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply text-neutral-900 dark:text-neutral-100 bg-neutral-50 dark:bg-neutral-950;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Remove default focus outline in favor of ring */
+  a, button {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500;
+  }
+}
+
+@layer components {
+  /* Modern scrollbar */
+  .scrollbar-modern::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+  
+  .scrollbar-modern::-webkit-scrollbar-track {
+    @apply bg-neutral-100 dark:bg-neutral-800 rounded-full;
+  }
+  
+  .scrollbar-modern::-webkit-scrollbar-thumb {
+    @apply bg-neutral-300 dark:bg-neutral-600 rounded-full hover:bg-neutral-400 dark:hover:bg-neutral-500 transition-colors;
+  }
+  
+  /* Glass morphism effect */
+  .glass {
+    @apply backdrop-blur-md bg-white/70 dark:bg-neutral-900/70 border border-white/20 dark:border-neutral-700/30;
+  }
+  
+  /* Button styles */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-xl px-4 py-2.5 font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 disabled:opacity-50;
+  }
+  
+  .btn-primary {
+    @apply bg-primary-500 hover:bg-primary-600 text-white shadow-sm;
+  }
+  
+  .btn-secondary {
+    @apply bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-200 border border-neutral-200 dark:border-neutral-700;
+  }
+  
+  /* Card styles */
+  .card {
+    @apply bg-white dark:bg-neutral-800 rounded-2xl shadow-card overflow-hidden border border-neutral-100 dark:border-neutral-700;
+  }
+}
