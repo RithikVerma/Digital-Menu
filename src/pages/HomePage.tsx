@@ -4,10 +4,40 @@ import { CategoryFilter } from '../components/CategoryFilter';
 import { SearchBar } from '../components/SearchBar';
 import { SortSelector } from '../components/SortSelector';
 import { MenuGrid } from '../components/MenuGrid';
+import { useLoading } from '../context/LoadingContext';
 import { motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 
 export const HomePage = () => {
   const { filters, filteredItems, setCategory, setSearchTerm, setSortBy } = useMenuFilter(menuItems);
+  const { showLoader, hideLoader } = useLoading();
+  const previousFilters = useRef(filters);
+
+  // Handle different loading states based on filter type
+  useEffect(() => {
+    // Don't trigger loading on initial render
+    if (previousFilters.current === filters) {
+      return;
+    }
+    
+    // Determine what changed to show appropriate loading message
+    let loadingTime = 500;
+    
+    // Searching tends to be more resource-intensive, simulate longer load
+    if (previousFilters.current.searchTerm !== filters.searchTerm) {
+      loadingTime = 800;
+    }
+    
+    showLoader();
+    const loadingTimeout = setTimeout(() => {
+      hideLoader();
+    }, loadingTime);
+    
+    // Update ref for next comparison
+    previousFilters.current = filters;
+
+    return () => clearTimeout(loadingTimeout);
+  }, [filters, showLoader, hideLoader]);
 
   return (
     <div className="h-full overflow-y-auto scrollbar-modern pb-12">

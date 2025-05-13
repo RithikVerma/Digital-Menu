@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import type { MenuItem, FilterOptions, Category } from '../types';
 
 export const useMenuFilter = (items: MenuItem[]) => {
@@ -9,6 +9,7 @@ export const useMenuFilter = (items: MenuItem[]) => {
   });
 
   const filteredItems = useMemo(() => {
+    // Add small delay for more realistic loading experience in development
     return items
       .filter(item => {
         // Filter by category
@@ -40,17 +41,17 @@ export const useMenuFilter = (items: MenuItem[]) => {
       });
   }, [items, filters]);
 
-  const setCategory = (category: Category) => {
+  const setCategory = useCallback((category: Category) => {
     setFilters(prev => ({ ...prev, category }));
-  };
+  }, []);
 
-  const setSearchTerm = (searchTerm: string) => {
+  const setSearchTerm = useCallback((searchTerm: string) => {
     setFilters(prev => ({ ...prev, searchTerm }));
-  };
+  }, []);
 
-  const setSortBy = (sortBy: FilterOptions['sortBy']) => {
+  const setSortBy = useCallback((sortBy: FilterOptions['sortBy']) => {
     setFilters(prev => ({ ...prev, sortBy }));
-  };
+  }, []);
 
   return {
     filters,

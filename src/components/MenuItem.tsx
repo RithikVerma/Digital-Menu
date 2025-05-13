@@ -1,5 +1,6 @@
 import type { MenuItem as MenuItemType } from '../types';
 import { motion } from 'framer-motion';
+import { formatCurrency } from '../utils/formatCurrency';
 
 interface MenuItemProps {
   item: MenuItemType;
@@ -40,7 +41,7 @@ export const MenuItem = ({ item }: MenuItemProps) => {
         <div className="flex justify-between items-start">
           <h3 className="text-lg font-bold text-neutral-900 dark:text-white">{name}</h3>
           <div className="px-3 py-1.5 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 font-bold rounded-full text-sm">
-            ${price.toFixed(2)}
+            {formatCurrency(price)}
           </div>
         </div>
         <p className="text-neutral-600 dark:text-neutral-300 text-sm mt-2 line-clamp-3">
