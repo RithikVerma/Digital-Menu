@@ -5,7 +5,6 @@ import { HomePage } from './pages/HomePage';
 import { QRCodePage } from './pages/QRCodePage';
 import { Header } from './components/Header';
 import { Loader } from './components/Loader';
-import { RefreshButton } from './components/RefreshButton';
 import { useEffect } from 'react';
 
 const AppContent = () => {
@@ -59,7 +58,6 @@ const AppContent = () => {
             </div>
           </div>
         </footer>
-        <RefreshButton />
       </Router>
     </div>
   );
