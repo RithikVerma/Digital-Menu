@@ -1,6 +1,22 @@
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
-export const Loader = () => {
+export const LoaderWrapper = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Set loading to false after component mounts
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000); // Show loader for 2 seconds minimum
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  return isLoading ? <Loader /> : null;
+};
+
+const Loader = () => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md z-50">
       <motion.div 

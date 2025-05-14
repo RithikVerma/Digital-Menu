@@ -1,16 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
-import { LoadingProvider, useLoading } from './context/LoadingContext';
+import { LoadingProvider } from './context/LoadingContext';
 import { HomePage } from './pages/HomePage';
 import { QRCodePage } from './pages/QRCodePage';
 import { Header } from './components/Header';
-import { Loader } from './components/Loader';
+import { LoaderWrapper } from './components/Loader';
 import { useEffect } from 'react';
 
 const AppContent = () => {
-  const { isLoading, hideLoader } = useLoading();
-
-  // Load fonts and simulate initial loading
+  // Load fonts
   useEffect(() => {
     // Add Google Fonts
     const link = document.createElement('link');
@@ -18,20 +16,14 @@ const AppContent = () => {
     link.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap';
     document.head.appendChild(link);
 
-    // Simulate initial loading for demonstration
-    const timer = setTimeout(() => {
-      hideLoader();
-    }, 1500);
-    
     return () => {
-      clearTimeout(timer);
       document.head.removeChild(link);
     };
-  }, [hideLoader]);
+  }, []);
 
   return (
     <div className="flex flex-col h-screen w-screen overflow-x-hidden bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 transition-colors duration-200 font-sans">
-      {isLoading && <Loader />}
+      <LoaderWrapper />
       <Router>
         <Header />
         <main className="flex-1 overflow-y-auto">

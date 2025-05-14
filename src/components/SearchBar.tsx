@@ -40,7 +40,7 @@ export const SearchBar = ({ onSearch, initialSearchTerm = '' }: SearchBarProps) 
         <motion.button
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-neutral-200 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600"
+          className="absolute right-3 top-1/4 -translate-y-1/2 p-1.5 rounded-full bg-neutral-200 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600"
           onClick={() => setSearchTerm('')}
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
